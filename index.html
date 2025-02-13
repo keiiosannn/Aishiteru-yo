@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aishiteru yo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebf0;
+            flex-direction: column;
+            animation: pulse 5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { background-color: #ffebf0; }
+            50% { background-color: #ffd6e0; }
+            100% { background-color: #ffebf0; }
+        }
+        .card {
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            transform: scale(0);
+            transition: transform 0.5s ease-in-out;
+            opacity: 0;
+        }
+        .card.open {
+            transform: scale(1);
+            opacity: 1;
+        }
+        #message {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out 0.3s;
+            font-size: 8px;
+            font-weight: bold;
+            color: red;
+            margin-top: 20px;
+        }
+        #message.show {
+            opacity: 1;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <button class="btn btn-danger mb-3" onclick="openCard()">туц</button>
+    <div class="card" id="card">
+        <p id="message">❤️<br>В мире таак много удивительных 'случайностей'<br>Мы могли начать поиск позже, выбрать другой режим — и тогда просто не оказались бы вместе в одном матче<br>
+            Но почему-то мы встретились<br>
+            И теперь ты звучишь самой прекрасной мелодией в моём сердце<br>
+            И мы играем вместе, смоотрим аниме и дорамы, говорим обо всём и ни о чём, мечатем, строим планы, волнуемся; что-то новое друг в друге открываем; идем по пути жизни вместе - и мы дома, рядом — там, где счастье, тепло, понимание, поддержка, забота, нежность и любовь<br>
+            Друг с другом, где все становится тааким мягким и легким<br>
+            И я беру тебя за руку — мы идём дальше<br>
+            Спасибо тебе за все<br>
+            Люблю. Безмерно и бесконечно<br>
+            ❤️    
+
+        </p>
+        <button class="btn btn-primary mt-2" onclick="toggleMusic()">-Луна сегодня красивая-</button>
+    </div>
+    <audio id="song" src="./完整版 - i watch the moon.mp3"></audio>
+
+    <script>
+        function openCard() {
+            let card = document.getElementById('card');
+            let message = document.getElementById('message');
+            if (!card.classList.contains('open')) {
+                card.classList.add('open');
+                setTimeout(() => message.classList.add('show'), 500);
+            } else {
+                message.classList.remove('show');
+                setTimeout(() => card.classList.remove('open'), 500);
+            }
+        }
+        function toggleMusic() {
+            let song = document.getElementById('song');
+            if (song.paused) {
+                song.play();
+            } else {
+                song.pause();
+                song.currentTime = 0;
+            }
+        }
+    </script>
+</body>
+</html>
